@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
+import { useEffect } from "react";
 import noteContext from "../context/notes/notecontext";
 import Addnote from "./Addnote";
 import Noteitem from "./Noteitem";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  const { notes, addNote } = context;
+  const { notes, getNotes } = context;
+  useEffect(()=> {
+    getNotes()
+    //eslint-disable-next-line
+  },[])
   return (
     <div>
       <Addnote />
