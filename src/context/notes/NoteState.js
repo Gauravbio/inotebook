@@ -17,7 +17,6 @@ const NoteState = (props) => {
       }
     });
     const json=await response.json();
-    console.log(json);
     setNotes(json);
   }
 
@@ -33,7 +32,7 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({title,description,tag}),
     });
-
+    
     const note=await response.json();
     setNotes(notes.concat(note));
   };
@@ -41,7 +40,7 @@ const NoteState = (props) => {
   //deletenote
   const deleteNote = async (id) => {
     //api call
-    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+    await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -49,8 +48,6 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZGJmOTUyZDk0NWZhN2UyZWZmODM5NSIsImlhdCI6MTY0MjU3NTA4M30.U1z63_owHtpk9gixuf_TRDtJT0lwk74BYjzhexCcJy8",
       }
     });
-    const json=response.json();
-    console.log(json);
     
     const newNotes = notes.filter((note) => {
       return note._id !== id;
@@ -61,7 +58,7 @@ const NoteState = (props) => {
   //editnote
   const editNote = async (id, title, description,tag) => {
     //API call
-    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+    await fetch(`${host}/api/notes/updatenote/${id}`, {
       method:"PUT",
       headers: {
         "Content-Type": "application/json",
@@ -70,8 +67,6 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({title,description,tag}),
     });
-     const json=await response.json();
-     console.log(json);
      let newNotes=JSON.parse(JSON.stringify(notes))
 
     //logic to add in client

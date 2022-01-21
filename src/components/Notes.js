@@ -20,7 +20,7 @@ const Notes = () => {
     setNote({id: currentNote._id,etitle:currentNote.title,edescription:currentNote.description,etag:currentNote.tag})
   }
   const handleClick=(e) => {
-    editNote(note.id,note.etitle,note.edescription,note.etag)
+    editNote(note.id,note.etitle,note.edescription,note.etag);
     refClose.current.click();
   }
 const onChange = (e)=> {
@@ -80,7 +80,8 @@ const onChange = (e)=> {
               id="edescription"
               name="edescription"
               value={note.edescription}
-              onChange={onChange}
+              onChange={onChange} required
+              minLength={5}
             />
             </div>
             <div className="mb-3">
@@ -107,7 +108,7 @@ const onChange = (e)=> {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary" disabled={note.etitle.length<5 || note.edescription.length<5}
+              <button disabled={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-primary" disabled={note.etitle.length<5 || note.edescription.length<5}
               onClick={handleClick}>
                 Update Note
               </button>
@@ -116,8 +117,9 @@ const onChange = (e)=> {
         </div>
       </div>
 
-      <div className="row my-3">
+      <div className="container row my-3">
         <h2>Your notes</h2>
+        {notes.length===0 && "no notes to display"}
         {notes.map((note) => {
           return (
             <Noteitem key={note._id} updateNote={updateNote} note={note} />
