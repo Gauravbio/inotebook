@@ -1,14 +1,11 @@
 import React from "react";
-import Alert from "./Alert";
-// import Addnote from "./Addnote";
-// import noteContext from "../context/notes/notecontext";
 import Notes from "./Notes";
 
-export const Home = () => {
+export const Home = (props) => {
+  const {showAlert}=props;
   return (
     <div>
-      <Alert/>
-      <Notes />
+      <Notes showAlert={showAlert}/>
     </div>
   );
 };
